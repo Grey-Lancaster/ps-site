@@ -42,10 +42,20 @@
     .contact-block-text a:hover { color:var(--green); }
     .contact-block-text p { color:var(--gray); font-size:0.85rem; margin:0; line-height:1.5; }
 
-    .text-alert-box { background:var(--light); border-radius:10px; padding:20px; margin-top:8px; }
-    .text-alert-box h4 { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1rem; text-transform:uppercase; color:var(--navy); margin-bottom:8px; }
-    .text-alert-box p { color:var(--gray); font-size:0.87rem; margin:0; line-height:1.55; }
-    .text-alert-box strong { color:var(--navy); }
+    .text-alert-box {
+      background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+      border: 2px solid var(--green);
+      border-left: 5px solid var(--green);
+      border-radius: 10px; padding: 20px; margin-top: 8px;
+      box-shadow: 0 2px 12px rgba(46,170,60,0.12);
+    }
+    .text-alert-box h4 {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+      font-size: 1.05rem; text-transform: uppercase; color: var(--green-dark);
+      margin-bottom: 8px; letter-spacing: 0.5px;
+    }
+    .text-alert-box p { color: #1a3a1a; font-size: 0.9rem; margin: 0; line-height: 1.6; }
+    .text-alert-box strong { color: var(--navy); }
 
     /* Form column */
     .contact-form-box { background:var(--light); border-radius:12px; padding:36px; }
@@ -222,7 +232,7 @@
       </div>
 
       <div class="text-alert-box">
-        <h4>📲 Service Alerts via Text</h4>
+        <h4>📲 Sign Up for Service Alerts! <span style="font-size:0.7rem;background:#fef9c3;color:#854d0e;border:1px solid #fcd34d;border-radius:4px;padding:2px 7px;font-family:'Barlow',sans-serif;font-weight:700;letter-spacing:0;text-transform:none;vertical-align:middle;">⚠️ Coming Soon</span></h4>
         <p>Stay informed about route changes and holidays. Text <strong>"JOIN"</strong> to <strong>(828) 817-2307</strong> to sign up for free service alerts.</p>
       </div>
     </div>
