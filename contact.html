@@ -228,8 +228,8 @@
     </div>
 
     <div class="contact-form-box">
-      <h3>Send Us a Message</h3>
-      <p class="form-sub">Fill out the form below and we'll be in touch shortly. For faster response, give us a call!</p>
+      <h3 id="formTitle">Send Us a Message</h3>
+      <p class="form-sub" id="formSub">Fill out the form below and we'll be in touch shortly. For faster response, give us a call!</p>
 
       <form id="contactForm" action="https://formspree.io/f/mkoyqqrz" method="POST" novalidate>
 
@@ -362,8 +362,10 @@
     })
     .then(function(response) {
       if (response.ok) {
-        // Success — hide form, show thank-you message
+        // Success — hide form, title, subtitle; show thank-you message
         document.getElementById('contactForm').style.display = 'none';
+        document.getElementById('formTitle').style.display = 'none';
+        document.getElementById('formSub').style.display = 'none';
         var msg = document.getElementById('successMsg');
         msg.style.display = 'block';
         msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
