@@ -233,11 +233,7 @@
 
       <form id="contactForm" action="https://formspree.io/f/mkoyqqrz" method="POST" novalidate>
 
-        <!-- Hidden field so Formspree email subject is meaningful -->
         <input type="hidden" name="_subject" value="New Message – Precision Sanitation Website"/>
-
-        <!-- Redirect back to the same page after submit (Formspree default thank-you page is ugly) -->
-        <input type="hidden" name="_next" value="https://grey-lancaster.github.io/ps-site/contact.html?sent=1"/>
 
         <div class="form-2col">
           <div class="form-row">
@@ -319,13 +315,6 @@
 </footer>
 
 <script>
-  // Show success banner if Formspree redirected back with ?sent=1
-  if (window.location.search.includes('sent=1')) {
-    document.getElementById('contactForm').style.display = 'none';
-    document.getElementById('successMsg').style.display = 'block';
-    window.history.replaceState({}, '', window.location.pathname);
-  }
-
   function showError(inputId, errorId) {
     document.getElementById(inputId).classList.add('input-error');
     document.getElementById(errorId).classList.add('visible');
@@ -335,42 +324,61 @@
     document.getElementById(errorId).classList.remove('visible');
   }
 
-  // Clear errors on input
+  // Clear errors as user types
   ['fname','phone','subject'].forEach(function(id) {
-    document.getElementById(id).addEventListener('input', function() {
-      clearError(id, id + '-error');
-    });
-    document.getElementById(id).addEventListener('change', function() {
-      clearError(id, id + '-error');
-    });
+    var el = document.getElementById(id);
+    el.addEventListener('input', function() { clearError(id, id+'-error'); });
+    el.addEventListener('change', function() { clearError(id, id+'-error'); });
   });
 
   document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Always prevent default — we handle via fetch
+
     const fname = document.getElementById('fname').value.trim();
     const phone = document.getElementById('phone').value.trim();
     const topic = document.getElementById('subject').value;
     let valid = true;
 
-    if (!fname) { showError('fname', 'fname-error'); valid = false; }
-    else { clearError('fname', 'fname-error'); }
-
-    if (!phone) { showError('phone', 'phone-error'); valid = false; }
-    else { clearError('phone', 'phone-error'); }
-
-    if (!topic) { showError('subject', 'subject-error'); valid = false; }
-    else { clearError('subject', 'subject-error'); }
+    if (!fname) { showError('fname', 'fname-error'); valid = false; } else { clearError('fname', 'fname-error'); }
+    if (!phone) { showError('phone', 'phone-error'); valid = false; } else { clearError('phone', 'phone-error'); }
+    if (!topic) { showError('subject', 'subject-error'); valid = false; } else { clearError('subject', 'subject-error'); }
 
     if (!valid) {
-      e.preventDefault();
-      // Scroll to first error
-      document.querySelector('.input-error').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      document.querySelector('.input-error').scrollIntoView({ behavior:'smooth', block:'center' });
       return;
     }
 
-    // All good — show loading state
+    // Show loading state
     const btn = document.getElementById('submitBtn');
     btn.textContent = 'Sending…';
     btn.disabled = true;
+
+    // Submit via fetch (AJAX) — stays on page, no redirect
+    const data = new FormData(document.getElementById('contactForm'));
+    fetch('https://formspree.io/f/mkoyqqrz', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function(response) {
+      if (response.ok) {
+        // Success — hide form, show thank-you message
+        document.getElementById('contactForm').style.display = 'none';
+        var msg = document.getElementById('successMsg');
+        msg.style.display = 'block';
+        msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        // Formspree returned an error
+        btn.textContent = 'Send Message';
+        btn.disabled = false;
+        alert('Something went wrong. Please call us at (828) 817-2307 or try again.');
+      }
+    })
+    .catch(function() {
+      btn.textContent = 'Send Message';
+      btn.disabled = false;
+      alert('Network error. Please check your connection and try again.');
+    });
   });
 </script>
 
