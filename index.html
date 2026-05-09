@@ -206,20 +206,68 @@
     @media (max-width: 480px) {
       .hero { padding: 52px 20px 48px; }
     }
-    nav { background:var(--navy-dark); position:sticky; top:0; z-index:100; box-shadow:0 4px 16px rgba(0,0,0,0.4); }
-    .nav-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:0 28px; height:82px; }
-    .nav-logo { text-decoration:none; display:flex; align-items:center; gap:14px; }
-    .nav-logo img { height:66px; width:auto; display:block; filter:drop-shadow(0 2px 6px rgba(0,0,0,0.4)); }
-    .nav-logo-text { display:flex; flex-direction:column; }
-    .nav-logo-text strong { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.15rem; color:var(--white); letter-spacing:0.5px; line-height:1.1; }
-    .nav-logo-text span { font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:0.72rem; color:var(--green); letter-spacing:2px; text-transform:uppercase; }
-    .nav-links { display:flex; gap:4px; align-items:center; }
-    .nav-links a { color:rgba(255,255,255,0.85); text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.05rem; letter-spacing:1px; text-transform:uppercase; padding:9px 16px; border-radius:4px; transition:color 0.2s,background 0.2s; }
-    .nav-links a:hover,.nav-links a.active { color:var(--white); background:rgba(46,170,60,0.25); }
-    .nav-phone { background:var(--green) !important; color:var(--white) !important; border-radius:5px !important; padding:10px 20px !important; font-size:1.05rem !important; letter-spacing:0.5px !important; }
-    .nav-phone:hover { background:var(--green-dark) !important; }
     @media(max-width:900px){ .nav-logo-text { display:none; } }
     @media(max-width:768px){ .nav-links a:not(.nav-phone){ display:none; } .nav-logo img{ height:52px; } }
+    nav {
+      background: linear-gradient(90deg, var(--navy-dark) 0%, #162454 60%, #0f2040 100%);
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      border-bottom: 3px solid var(--green);
+    }
+    .nav-inner {
+      max-width: 1300px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 32px; height: 96px;
+    }
+    .nav-logo { text-decoration: none; display: flex; align-items: center; gap: 0; }
+    .nav-logo img {
+      height: 82px; width: auto; display: block;
+      filter: drop-shadow(0 3px 10px rgba(0,0,0,0.5));
+      transition: transform 0.2s;
+    }
+    .nav-logo img:hover { transform: scale(1.03); }
+    .nav-logo-text { display: flex; flex-direction: column; margin-left: 14px; }
+    .nav-logo-text strong {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
+      font-size: 1.35rem; color: var(--white); letter-spacing: 1px;
+      line-height: 1.1; text-transform: uppercase;
+    }
+    .nav-logo-text span {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
+      font-size: 0.72rem; color: var(--green); letter-spacing: 2.5px;
+      text-transform: uppercase; margin-top: 2px;
+    }
+    .nav-links { display: flex; gap: 4px; align-items: center; }
+    .nav-links a {
+      color: rgba(255,255,255,0.82); text-decoration: none;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: 1.05rem; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 10px 18px; border-radius: 4px;
+      transition: color 0.2s, background 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 4px; left: 18px; right: 18px;
+      height: 2px; background: var(--green); border-radius: 2px;
+      transform: scaleX(0); transition: transform 0.2s;
+    }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); background: rgba(255,255,255,0.06); }
+    .nav-phone {
+      background: var(--green) !important; color: var(--white) !important;
+      border-radius: 6px !important; padding: 12px 22px !important;
+      font-size: 1.1rem !important; letter-spacing: 0.5px !important;
+      box-shadow: 0 3px 12px rgba(46,170,60,0.4) !important;
+      margin-left: 8px !important;
+    }
+    .nav-phone::after { display: none !important; }
+    .nav-phone:hover { background: var(--green-dark) !important; transform: translateY(-1px); box-shadow: 0 5px 16px rgba(46,170,60,0.5) !important; }
+    @media(max-width: 960px) { .nav-logo-text { display: none; } }
+    @media(max-width: 768px) {
+      .nav-links a:not(.nav-phone) { display: none; }
+      .nav-inner { height: 72px; padding: 0 20px; }
+      .nav-logo img { height: 60px; }
+    }
   </style>
 </head>
 <body>
@@ -228,10 +276,10 @@
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
       <img src="logo.png" alt="Precision Sanitation LLC"
-           onerror="this.style.display='none';document.querySelector('.nav-logo-text').style.display='flex'"/>
-      <div class="nav-logo-text" style="display:flex;">
-        <strong>PRECISION SANITATION</strong>
-        <span>Reliable Trash Pickup · Polk County, NC</span>
+           onerror="this.style.display='none'"/>
+      <div class="nav-logo-text">
+        <strong>Precision Sanitation LLC</strong>
+        <span>Reliable Trash Pickup &middot; Polk County, NC</span>
       </div>
     </a>
     <div class="nav-links">
