@@ -73,6 +73,7 @@
     .field-error { display:none; color:#dc2626; font-size:0.8rem; margin-top:5px; font-weight:600; }
     .field-error.visible { display:block; }
     .input-error { border-color:#dc2626 !important; box-shadow:0 0 0 3px rgba(220,38,38,0.12) !important; }
+    .success-msg { display:none; background:#d1fae5; border:1.5px solid #6ee7b7; color:#065f46; border-radius:8px; padding:16px 20px; margin-top:16px; font-size:0.92rem; line-height:1.6; }
     .success-msg strong { display:block; margin-bottom:4px; font-family:'Barlow Condensed',sans-serif; font-size:1.1rem; text-transform:uppercase; }
 
     .service-alert-strip { background:var(--green); color:var(--white); padding:40px 24px; text-align:center; }
@@ -289,7 +290,7 @@
         <p class="form-disclaimer">* Required fields. We typically respond within 1 business day.</p>
       </form>
 
-      <div class="success-msg" id="successMsg">
+      <div class="success-msg" id="successMsg" style="display:none;">
         <strong>✅ Message Sent!</strong>
         Thank you for reaching out. We'll be in touch soon. For faster assistance, feel free to call or text us at (828) 817-2307.
       </div>
