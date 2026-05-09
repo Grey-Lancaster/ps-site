@@ -70,7 +70,9 @@
     .form-disclaimer { text-align:center; margin-top:10px; font-size:0.78rem; color:var(--gray); }
 
     /* Success message (hidden by default) */
-    .success-msg { display:none; background:#d1fae5; border:1.5px solid #6ee7b7; color:#065f46; border-radius:8px; padding:16px 20px; margin-top:16px; font-size:0.92rem; line-height:1.6; }
+    .field-error { display:none; color:#dc2626; font-size:0.8rem; margin-top:5px; font-weight:600; }
+    .field-error.visible { display:block; }
+    .input-error { border-color:#dc2626 !important; box-shadow:0 0 0 3px rgba(220,38,38,0.12) !important; }
     .success-msg strong { display:block; margin-bottom:4px; font-family:'Barlow Condensed',sans-serif; font-size:1.1rem; text-transform:uppercase; }
 
     .service-alert-strip { background:var(--green); color:var(--white); padding:40px 24px; text-align:center; }
@@ -240,6 +242,7 @@
           <div class="form-row">
             <label for="fname">First Name *</label>
             <input type="text" id="fname" name="first_name" placeholder="Jane" required/>
+            <span class="field-error" id="fname-error">Please enter your first name.</span>
           </div>
           <div class="form-row">
             <label for="lname">Last Name</label>
@@ -250,6 +253,7 @@
         <div class="form-row">
           <label for="phone">Phone Number *</label>
           <input type="tel" id="phone" name="phone" placeholder="(828) 555-0000" required/>
+          <span class="field-error" id="phone-error">Please enter your phone number.</span>
         </div>
 
         <div class="form-row">
@@ -273,6 +277,7 @@
             <option>Billing Question</option>
             <option>Other</option>
           </select>
+          <span class="field-error" id="subject-error">Please select a topic.</span>
         </div>
 
         <div class="form-row">
@@ -317,23 +322,54 @@
   if (window.location.search.includes('sent=1')) {
     document.getElementById('contactForm').style.display = 'none';
     document.getElementById('successMsg').style.display = 'block';
-    // Clean the URL so refreshing doesn't re-show it oddly
     window.history.replaceState({}, '', window.location.pathname);
   }
 
-  // Client-side validation before submitting
+  function showError(inputId, errorId) {
+    document.getElementById(inputId).classList.add('input-error');
+    document.getElementById(errorId).classList.add('visible');
+  }
+  function clearError(inputId, errorId) {
+    document.getElementById(inputId).classList.remove('input-error');
+    document.getElementById(errorId).classList.remove('visible');
+  }
+
+  // Clear errors on input
+  ['fname','phone','subject'].forEach(function(id) {
+    document.getElementById(id).addEventListener('input', function() {
+      clearError(id, id + '-error');
+    });
+    document.getElementById(id).addEventListener('change', function() {
+      clearError(id, id + '-error');
+    });
+  });
+
   document.getElementById('contactForm').addEventListener('submit', function(e) {
     const fname = document.getElementById('fname').value.trim();
     const phone = document.getElementById('phone').value.trim();
     const topic = document.getElementById('subject').value;
-    if (!fname || !phone || !topic) {
+    let valid = true;
+
+    if (!fname) { showError('fname', 'fname-error'); valid = false; }
+    else { clearError('fname', 'fname-error'); }
+
+    if (!phone) { showError('phone', 'phone-error'); valid = false; }
+    else { clearError('phone', 'phone-error'); }
+
+    if (!topic) { showError('subject', 'subject-error'); valid = false; }
+    else { clearError('subject', 'subject-error'); }
+
+    if (!valid) {
       e.preventDefault();
-      alert('Please fill in your first name, phone number, and topic before sending.');
+      // Scroll to first error
+      document.querySelector('.input-error').scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
-    // Show loading state on button
-    document.getElementById('submitBtn').textContent = 'Sending…';
-    document.getElementById('submitBtn').disabled = true;
+
+    // All good — show loading state
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
   });
 </script>
 
