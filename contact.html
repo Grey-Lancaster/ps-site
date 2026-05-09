@@ -228,32 +228,43 @@
       <h3>Send Us a Message</h3>
       <p class="form-sub">Fill out the form below and we'll be in touch shortly. For faster response, give us a call!</p>
 
-      <div id="contactForm">
+      <form id="contactForm" action="https://formspree.io/f/mkoyqqrz" method="POST" novalidate>
+
+        <!-- Hidden field so Formspree email subject is meaningful -->
+        <input type="hidden" name="_subject" value="New Message – Precision Sanitation Website"/>
+
+        <!-- Redirect back to the same page after submit (Formspree default thank-you page is ugly) -->
+        <input type="hidden" name="_next" value="https://grey-lancaster.github.io/ps-site/contact.html?sent=1"/>
+
         <div class="form-2col">
           <div class="form-row">
-            <label for="fname">First Name</label>
-            <input type="text" id="fname" placeholder="Jane"/>
+            <label for="fname">First Name *</label>
+            <input type="text" id="fname" name="first_name" placeholder="Jane" required/>
           </div>
           <div class="form-row">
             <label for="lname">Last Name</label>
-            <input type="text" id="lname" placeholder="Smith"/>
+            <input type="text" id="lname" name="last_name" placeholder="Smith"/>
           </div>
         </div>
+
         <div class="form-row">
-          <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" placeholder="(828) 555-0000"/>
+          <label for="phone">Phone Number *</label>
+          <input type="tel" id="phone" name="phone" placeholder="(828) 555-0000" required/>
         </div>
+
         <div class="form-row">
-          <label for="email">Email Address (optional)</label>
-          <input type="email" id="email" placeholder="jane@example.com"/>
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="jane@example.com"/>
         </div>
+
         <div class="form-row">
           <label for="address">Service Address</label>
-          <input type="text" id="address" placeholder="123 Main St, Columbus, NC 28722"/>
+          <input type="text" id="address" name="service_address" placeholder="123 Main St, Columbus, NC 28722"/>
         </div>
+
         <div class="form-row">
-          <label for="subject">How Can We Help?</label>
-          <select id="subject">
+          <label for="subject">How Can We Help? *</label>
+          <select id="subject" name="topic" required>
             <option value="">– Select a topic –</option>
             <option>Sign Up for Service</option>
             <option>Question About My Pickup Day</option>
@@ -263,16 +274,18 @@
             <option>Other</option>
           </select>
         </div>
+
         <div class="form-row">
           <label for="message">Message</label>
-          <textarea id="message" placeholder="Tell us more about what you need..."></textarea>
+          <textarea id="message" name="message" placeholder="Tell us more about what you need..."></textarea>
         </div>
-        <button class="btn-submit" onclick="handleSubmit()">Send Message</button>
-        <p class="form-disclaimer">We typically respond within 1 business day. For urgent needs, please call us directly.</p>
-      </div>
+
+        <button type="submit" class="btn-submit" id="submitBtn">Send Message</button>
+        <p class="form-disclaimer">* Required fields. We typically respond within 1 business day.</p>
+      </form>
 
       <div class="success-msg" id="successMsg">
-        <strong>✅ Message Received!</strong>
+        <strong>✅ Message Sent!</strong>
         Thank you for reaching out. We'll be in touch soon. For faster assistance, feel free to call or text us at (828) 817-2307.
       </div>
     </div>
@@ -300,17 +313,28 @@
 </footer>
 
 <script>
-  function handleSubmit() {
-    const fname = document.getElementById('fname').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const subject = document.getElementById('subject').value;
-    if (!fname || !phone || !subject) {
-      alert('Please fill in your name, phone number, and how we can help you.');
-      return;
-    }
+  // Show success banner if Formspree redirected back with ?sent=1
+  if (window.location.search.includes('sent=1')) {
     document.getElementById('contactForm').style.display = 'none';
     document.getElementById('successMsg').style.display = 'block';
+    // Clean the URL so refreshing doesn't re-show it oddly
+    window.history.replaceState({}, '', window.location.pathname);
   }
+
+  // Client-side validation before submitting
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    const fname = document.getElementById('fname').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const topic = document.getElementById('subject').value;
+    if (!fname || !phone || !topic) {
+      e.preventDefault();
+      alert('Please fill in your first name, phone number, and topic before sending.');
+      return;
+    }
+    // Show loading state on button
+    document.getElementById('submitBtn').textContent = 'Sending…';
+    document.getElementById('submitBtn').disabled = true;
+  });
 </script>
 
 </body>
