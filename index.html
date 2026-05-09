@@ -1,50 +1,396 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Precision Sanitation LLC</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Precision Sanitation LLC – Reliable Trash Pickup | Polk County, NC</title>
+  <meta name="description" content="Reliable residential and commercial trash pickup serving Polk County, NC. Call (828) 817-2307 today!"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy: #1a2b5e;
+      --navy-dark: #0f1a3d;
+      --green: #2eaa3c;
+      --green-dark: #1d7a28;
+      --blue: #1e6fc5;
+      --white: #ffffff;
+      --light: #f4f7fb;
+      --gray: #6b7280;
+      --border: #e2e8f0;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Barlow', sans-serif; color: #1f2937; background: var(--white); }
+
+    /* NAV */
+    nav {
+      background: var(--navy-dark);
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; height: 68px;
+    }
+    .nav-logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 1.4rem;
+      color: var(--white); text-decoration: none; letter-spacing: 0.5px;
+    }
+    .nav-logo span { color: var(--green); }
+    .nav-links { display: flex; gap: 8px; }
+    .nav-links a {
+      color: rgba(255,255,255,0.85); text-decoration: none;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
+      font-size: 1rem; letter-spacing: 0.5px; text-transform: uppercase;
+      padding: 8px 14px; border-radius: 4px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--white); background: rgba(46,170,60,0.2);
+    }
+    .nav-phone {
+      background: var(--green); color: var(--white) !important;
+      border-radius: 4px; padding: 8px 16px !important;
+    }
+    .nav-phone:hover { background: var(--green-dark) !important; background-color: var(--green-dark) !important; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 50%, #1e3a7a 100%);
+      color: var(--white); padding: 80px 24px 70px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(46,170,60,0.12) 0%, transparent 60%);
+    }
+    .hero-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+      position: relative;
+    }
+    .hero-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 0.9rem; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--green); margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(2.8rem, 5vw, 4.2rem);
+      line-height: 1; text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+    .hero h1 em { color: var(--green); font-style: normal; }
+    .hero p {
+      font-size: 1.1rem; line-height: 1.65; color: rgba(255,255,255,0.82);
+      margin-bottom: 32px; max-width: 480px;
+    }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--green); color: var(--white);
+      padding: 14px 28px; border-radius: 5px; text-decoration: none;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: 1.05rem; letter-spacing: 0.5px; text-transform: uppercase;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--green-dark); transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent; color: var(--white);
+      border: 2px solid rgba(255,255,255,0.5);
+      padding: 12px 28px; border-radius: 5px; text-decoration: none;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: 1.05rem; letter-spacing: 0.5px; text-transform: uppercase;
+      transition: border-color 0.2s, background 0.2s;
+      display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+    .hero-badge-box {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px; padding: 32px;
+    }
+    .hero-badge-box .logo-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 3.5rem; line-height: 1;
+      letter-spacing: 2px; color: var(--white); margin-bottom: 4px;
+    }
+    .hero-badge-box .logo-text .g { color: var(--green); }
+    .hero-badge-box .logo-text .b { color: #5ba8f5; }
+    .hero-badge-box .sub { color: rgba(255,255,255,0.6); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
+    .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 2.2rem; color: var(--green);
+    }
+    .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; }
+    .phone-hero {
+      display: flex; align-items: center; gap: 10px;
+      margin-top: 20px; padding: 14px 20px;
+      background: rgba(255,255,255,0.08); border-radius: 8px;
+    }
+    .phone-icon { font-size: 1.4rem; }
+    .phone-text a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 1.5rem; color: var(--white);
+      text-decoration: none; letter-spacing: 1px;
+    }
+    .phone-text small { display: block; color: rgba(255,255,255,0.5); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* SCHEDULE STRIP */
+    .schedule-strip {
+      background: var(--green); color: var(--white); padding: 16px 24px;
+    }
+    .schedule-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    }
+    .schedule-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 0.85rem; text-transform: uppercase;
+      letter-spacing: 2px; opacity: 0.85; white-space: nowrap;
+    }
+    .day-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+    .day-pill {
+      background: rgba(255,255,255,0.2); border-radius: 4px;
+      padding: 4px 12px; font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 0.85rem; letter-spacing: 0.5px;
+    }
+    .day-pill span { opacity: 0.7; margin-left: 4px; font-weight: 400; }
+
+    /* FEATURES */
+    .features { padding: 72px 24px; background: var(--light); }
+    .features-inner { max-width: 1200px; margin: 0 auto; }
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 0.8rem; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--green); margin-bottom: 8px;
+    }
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(2rem, 4vw, 2.8rem);
+      text-transform: uppercase; color: var(--navy); margin-bottom: 8px;
+    }
+    .section-sub { color: var(--gray); font-size: 1rem; margin-bottom: 48px; max-width: 520px; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+    .card {
+      background: var(--white); border-radius: 10px; padding: 32px 24px;
+      border: 1px solid var(--border); transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.1); transform: translateY(-3px); }
+    .card-icon {
+      width: 52px; height: 52px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 20px;
+    }
+    .card h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 1.2rem; text-transform: uppercase;
+      color: var(--navy); margin-bottom: 10px; letter-spacing: 0.5px;
+    }
+    .card p { color: var(--gray); font-size: 0.92rem; line-height: 1.6; }
+
+    /* SERVICE AREA CTA */
+    .area-cta {
+      background: var(--navy); color: var(--white);
+      padding: 64px 24px; text-align: center;
+    }
+    .area-cta .section-title { color: var(--white); }
+    .area-cta .section-sub { color: rgba(255,255,255,0.65); margin: 0 auto 32px; }
+    .day-grid {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
+      margin-bottom: 36px;
+    }
+    .day-block {
+      padding: 10px 18px; border-radius: 6px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 0.92rem; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .mon { background: #2563eb; }
+    .tue { background: #dc2626; }
+    .wed { background: #d97706; }
+    .thu { background: #16a34a; }
+    .fri { background: #7c3aed; }
+    .day-block span { opacity: 0.7; font-weight: 400; font-size: 0.8rem; display: block; }
+
+    /* CONTACT STRIP */
+    .contact-strip { background: var(--green); color: var(--white); padding: 48px 24px; text-align: center; }
+    .contact-strip h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 2rem; text-transform: uppercase; margin-bottom: 8px;
+    }
+    .contact-strip p { opacity: 0.85; margin-bottom: 24px; }
+    .big-phone {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(2.2rem, 5vw, 3rem);
+      color: var(--white); text-decoration: none; letter-spacing: 1px;
+      display: inline-block; margin-bottom: 8px;
+    }
+    .text-join { opacity: 0.8; font-size: 0.9rem; }
+
+    /* FOOTER */
+    footer { background: var(--navy-dark); color: rgba(255,255,255,0.55); padding: 32px 24px; text-align: center; }
+    footer a { color: rgba(255,255,255,0.55); text-decoration: none; }
+    footer a:hover { color: var(--green); }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 1.2rem; color: var(--white); margin-bottom: 6px;
+    }
+    .footer-links { display: flex; justify-content: center; gap: 20px; margin: 12px 0; flex-wrap: wrap; }
+    .footer-links a { font-size: 0.85rem; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 36px; }
+      .hero-badge-box { display: none; }
+      .nav-links a:not(.nav-phone) { display: none; }
+    }
+    @media (max-width: 480px) {
+      .hero { padding: 52px 20px 48px; }
+    }
+  </style>
 </head>
 <body>
 
-<header class="top-bar">
-  <div class="wrap">
-    <h1>Precision Sanitation LLC</h1>
-    <p class="tagline">Reliable Trash Pickup – Polk County, NC</p>
-    <a href="tel:18288172307" class="call-btn">📞 (828) 817-2307</a>
-  </div>
-</header>
-
-<nav class="nav">
-  <div class="wrap">
-    <a href="index.html">Home</a>
-    <a href="area.html">Service Area</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><span>PS</span> Precision Sanitation</a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="servicearea.html">Service Area</a>
+      <a href="contact.html">Contact</a>
+      <a href="tel:8288172307" class="nav-phone">📞 (828) 817-2307</a>
+    </div>
   </div>
 </nav>
 
 <section class="hero">
-  <div class="wrap">
-    <h2>Dependable Trash Pickup You Can Count On</h2>
-    <p>Serving Polk County with reliable, professional weekly service.</p>
-  </div>
-</section>
-
-<section class="card">
-  <div class="wrap">
-    <h3>Service Alerts</h3>
-    <p>Get notified of delays due to weather or holidays.</p>
-
-    <div class="alert-box">
-      Text <strong>JOIN</strong> to <strong>(828) 817-2307</strong>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">Polk County, NC</div>
+      <h1>Reliable <em>Trash Pickup</em> You Can Count On</h1>
+      <p>Precision Sanitation LLC provides dependable, affordable residential and commercial trash collection throughout Polk County — 5 days a week.</p>
+      <div class="hero-btns">
+        <a href="contact.html" class="btn-primary">Get Started Today</a>
+        <a href="servicearea.html" class="btn-outline">View Service Map</a>
+      </div>
+    </div>
+    <div class="hero-badge-box">
+      <div class="logo-text"><span class="g">P</span><span class="b">S</span></div>
+      <div class="sub">Precision Sanitation LLC</div>
+      <div class="stat-row">
+        <div class="stat-item">
+          <div class="stat-num">5</div>
+          <div class="stat-label">Days a Week</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">5+</div>
+          <div class="stat-label">Service Zones</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Local & Reliable</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">NC</div>
+          <div class="stat-label">Polk County</div>
+        </div>
+      </div>
+      <div class="phone-hero">
+        <div class="phone-icon">📞</div>
+        <div class="phone-text">
+          <a href="tel:8288172307">(828) 817-2307</a>
+          <small>Call or Text Anytime</small>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
+<div class="schedule-strip">
+  <div class="schedule-inner">
+    <div class="schedule-label">Weekly Pickup Schedule</div>
+    <div class="day-pills">
+      <div class="day-pill">Mon <span>Columbus</span></div>
+      <div class="day-pill">Tue <span>Green Creek / Mill Spring</span></div>
+      <div class="day-pill">Wed <span>Saluda</span></div>
+      <div class="day-pill">Thu <span>Tryon</span></div>
+      <div class="day-pill">Fri <span>Sunny View / Lake Lure</span></div>
+    </div>
+  </div>
+</div>
+
+<section class="features">
+  <div class="features-inner">
+    <div class="section-label">Why Choose Us</div>
+    <h2 class="section-title">Dependable Service,<br>Every Week</h2>
+    <p class="section-sub">We're a local Polk County business committed to keeping our community clean and our customers happy.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">🗓️</div>
+        <h3>5-Day Weekly Coverage</h3>
+        <p>We serve all of Polk County Monday through Friday with dedicated routes so you always know your pickup day.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📍</div>
+        <h3>Local & Community-Focused</h3>
+        <p>We're your neighbors. Precision Sanitation is proud to be a local Polk County business, not a big out-of-state corporation.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💬</div>
+        <h3>Easy Communication</h3>
+        <p>Reach us by call or text at (828) 817-2307. Sign up for service alerts by texting "JOIN" to the same number.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🚛</div>
+        <h3>Reliable Pickup</h3>
+        <p>Precision is in our name and our work. Count on us to show up, week after week, no matter what.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="area-cta">
+  <div class="section-label" style="color:var(--green)">Where We Serve</div>
+  <h2 class="section-title">5-Day Pickup Across Polk County</h2>
+  <p class="section-sub">From Saluda to Tryon to Green Creek, we've got your neighborhood covered.</p>
+  <div class="day-grid">
+    <div class="day-block mon">Monday<span>Columbus &amp; Surrounding</span></div>
+    <div class="day-block tue">Tuesday<span>Green Creek, Mill Spring</span></div>
+    <div class="day-block wed">Wednesday<span>Saluda &amp; Surrounding</span></div>
+    <div class="day-block thu">Thursday<span>Tryon &amp; Surrounding</span></div>
+    <div class="day-block fri">Friday<span>Sunny View / Lake Lure</span></div>
+  </div>
+  <a href="servicearea.html" class="btn-primary">View Full Service Map →</a>
+</section>
+
+<section class="contact-strip">
+  <h2>Ready to Sign Up?</h2>
+  <p>Call or text us today to get started with reliable weekly trash pickup.</p>
+  <a href="tel:8288172307" class="big-phone">📞 (828) 817-2307</a>
+  <p class="text-join">Text "JOIN" to (828) 817-2307 for service alerts &amp; updates</p>
+</section>
+
 <footer>
-  <p>© 2026 Precision Sanitation LLC</p>
+  <div class="footer-inner">
+    <div class="footer-name">Precision Sanitation LLC</div>
+    <div style="font-size:0.82rem;margin-bottom:8px;">Reliable Trash Pickup · Polk County, NC</div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="servicearea.html">Service Area</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div style="font-size:0.78rem;">© 2025 Precision Sanitation LLC. All rights reserved.</div>
+  </div>
 </footer>
 
 </body>
