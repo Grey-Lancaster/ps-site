@@ -78,17 +78,15 @@
     }
     .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
     /* HERO RIGHT COLUMN */
-    .hero-visual { display: flex; flex-direction: column; align-items: center; gap: 0; }
-    .hero-logo-img { width: 85%; max-width: 380px; height: auto; display: block; filter: drop-shadow(0 4px 24px rgba(0,0,0,0.4)); }
+    .hero-visual { display: flex; flex-direction: column; align-items: center; justify-content: center; }
     .hero-truck-img {
-      width: 115%; max-width: 520px; height: auto; display: block;
-      margin-top: -20px; margin-left: 10%;
-      filter: drop-shadow(0 12px 32px rgba(0,0,0,0.5));
-      animation: truckFloat 3s ease-in-out infinite;
+      width: 100%; max-width: 580px; height: auto; display: block;
+      filter: drop-shadow(0 16px 40px rgba(0,0,0,0.6));
+      animation: truckFloat 3.5s ease-in-out infinite;
     }
     @keyframes truckFloat {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
+      50% { transform: translateY(-10px); }
     }
 
     /* SCHEDULE STRIP */
@@ -304,7 +302,6 @@
       </div>
     </div>
     <div class="hero-visual">
-      <img src="logo.png" alt="Precision Sanitation LLC" class="hero-logo-img"/>
       <img src="truck.png" alt="Precision Sanitation Truck" class="hero-truck-img"/>
     </div>
   </div>
