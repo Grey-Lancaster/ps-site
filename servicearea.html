@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Service Area – Precision Sanitation LLC | Polk County, NC</title>
+  <meta name="description" content="View Precision Sanitation's 5-day pickup schedule and service map for Polk County, NC. Columbus, Tryon, Saluda, Green Creek, Mill Spring, and Sunny View."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy:#1a2b5e; --navy-dark:#0f1a3d; --green:#2eaa3c;
+      --green-dark:#1d7a28; --white:#ffffff; --light:#f4f7fb;
+      --gray:#6b7280; --border:#e2e8f0;
+      --mon:#2563eb; --tue:#dc2626; --wed:#d97706; --thu:#16a34a; --fri:#7c3aed;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Barlow',sans-serif; color:#1f2937; background:var(--white); }
+
+    nav { background:var(--navy-dark); position:sticky; top:0; z-index:100; box-shadow:0 2px 12px rgba(0,0,0,0.3); }
+    .nav-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:0 24px; height:68px; }
+    .nav-logo { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; color:var(--white); text-decoration:none; letter-spacing:0.5px; }
+    .nav-logo span { color:var(--green); }
+    .nav-links { display:flex; gap:8px; }
+    .nav-links a { color:rgba(255,255,255,0.85); text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:1rem; letter-spacing:0.5px; text-transform:uppercase; padding:8px 14px; border-radius:4px; transition:color 0.2s,background 0.2s; }
+    .nav-links a:hover,.nav-links a.active { color:var(--white); background:rgba(46,170,60,0.2); }
+    .nav-phone { background:var(--green) !important; color:var(--white) !important; border-radius:4px; padding:8px 16px !important; }
+    .nav-phone:hover { background:var(--green-dark) !important; }
+
+    .page-hero { background:linear-gradient(135deg,var(--navy-dark) 0%,var(--navy) 100%); color:var(--white); padding:64px 24px; }
+    .page-hero-inner { max-width:1200px; margin:0 auto; }
+    .breadcrumb { font-size:0.82rem; color:rgba(255,255,255,0.5); margin-bottom:16px; }
+    .breadcrumb a { color:rgba(255,255,255,0.5); text-decoration:none; }
+    .breadcrumb a:hover { color:var(--green); }
+    .page-hero h1 { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(2.4rem,5vw,3.4rem); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px; }
+    .page-hero h1 em { color:var(--green); font-style:normal; }
+    .page-hero p { color:rgba(255,255,255,0.75); font-size:1.05rem; max-width:560px; line-height:1.6; }
+
+    .schedule-section { max-width:1200px; margin:0 auto; padding:64px 24px; }
+    .section-label { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.8rem; letter-spacing:3px; text-transform:uppercase; color:var(--green); margin-bottom:8px; }
+    .section-title { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(1.8rem,4vw,2.6rem); text-transform:uppercase; color:var(--navy); margin-bottom:8px; }
+    .section-sub { color:var(--gray); font-size:0.97rem; margin-bottom:40px; max-width:560px; line-height:1.6; }
+
+    .day-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; }
+    .day-card { border-radius:10px; overflow:hidden; }
+    .day-header { padding:18px 20px 14px; color:var(--white); }
+    .day-header .day-name { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.5rem; text-transform:uppercase; letter-spacing:1px; }
+    .day-header .day-short { font-size:0.75rem; opacity:0.7; text-transform:uppercase; letter-spacing:2px; margin-bottom:4px; }
+    .day-body { background:var(--light); padding:16px 20px; }
+    .day-body strong { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1rem; text-transform:uppercase; color:var(--navy); display:block; margin-bottom:4px; }
+    .day-body p { font-size:0.85rem; color:var(--gray); line-height:1.5; }
+    .mon-bg { background:var(--mon); }
+    .tue-bg { background:var(--tue); }
+    .wed-bg { background:var(--wed); }
+    .thu-bg { background:var(--thu); }
+    .fri-bg { background:var(--fri); }
+
+    .map-section { background:var(--navy-dark); padding:64px 24px; }
+    .map-section .section-label { color:#6ee7b7; }
+    .map-section .section-title { color:var(--white); }
+    .map-section .section-sub { color:rgba(255,255,255,0.6); }
+    .map-inner { max-width:1200px; margin:0 auto; }
+    .map-wrapper { margin-top:32px; border-radius:12px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,0.12); }
+    .map-wrapper img { width:100%; height:auto; display:block; }
+    .map-note { margin-top:14px; font-size:0.82rem; color:rgba(255,255,255,0.45); font-style:italic; text-align:center; }
+
+    .alert-strip { background:var(--navy); color:var(--white); padding:48px 24px; text-align:center; }
+    .alert-strip h2 { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.7rem; text-transform:uppercase; margin-bottom:12px; }
+    .alert-strip p { color:rgba(255,255,255,0.75); margin-bottom:20px; font-size:1rem; }
+    .text-code { display:inline-block; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:12px 24px; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.2rem; letter-spacing:1px; color:var(--white); }
+    .text-code span { color:var(--green); }
+
+    .contact-strip { background:var(--green); color:var(--white); padding:48px 24px; text-align:center; }
+    .contact-strip h2 { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:2rem; text-transform:uppercase; margin-bottom:8px; }
+    .contact-strip p { opacity:0.85; margin-bottom:24px; }
+    .big-phone { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(2.2rem,5vw,3rem); color:var(--white); text-decoration:none; letter-spacing:1px; display:inline-block; margin-bottom:8px; }
+    .btn-white { background:var(--white); color:var(--green); padding:13px 28px; border-radius:5px; text-decoration:none; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.05rem; letter-spacing:0.5px; text-transform:uppercase; display:inline-block; margin-top:8px; }
+    .btn-white:hover { background:rgba(255,255,255,0.9); }
+
+    footer { background:var(--navy-dark); color:rgba(255,255,255,0.55); padding:32px 24px; text-align:center; }
+    footer a { color:rgba(255,255,255,0.55); text-decoration:none; }
+    footer a:hover { color:var(--green); }
+    .footer-inner { max-width:1200px; margin:0 auto; }
+    .footer-name { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.2rem; color:var(--white); margin-bottom:6px; }
+    .footer-links { display:flex; justify-content:center; gap:20px; margin:12px 0; flex-wrap:wrap; }
+    .footer-links a { font-size:0.85rem; }
+
+    @media (max-width:768px) {
+      .nav-links a:not(.nav-phone) { display:none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><span>PS</span> Precision Sanitation</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="servicearea.html" class="active">Service Area</a>
+      <a href="contact.html">Contact</a>
+      <a href="tel:8288172307" class="nav-phone">📞 (828) 817-2307</a>
+    </div>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb"><a href="index.html">Home</a> › Service Area</div>
+    <h1>Our <em>Service Area</em></h1>
+    <p>We serve all of Polk County, NC with a 5-day weekly pickup schedule. Find your community and your pickup day below.</p>
+  </div>
+</section>
+
+<section class="schedule-section">
+  <div class="section-label">Weekly Pickup Schedule</div>
+  <h2 class="section-title">5-Day Coverage Across Polk County</h2>
+  <p class="section-sub">Routes are subject to change. Contact us with any questions about your specific address or pickup day.</p>
+  <div class="day-cards">
+    <div class="day-card">
+      <div class="day-header mon-bg">
+        <div class="day-short">Mon</div>
+        <div class="day-name">Monday</div>
+      </div>
+      <div class="day-body">
+        <strong>Columbus</strong>
+        <p>Columbus and surrounding areas in central Polk County.</p>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="day-header tue-bg">
+        <div class="day-short">Tue</div>
+        <div class="day-name">Tuesday</div>
+      </div>
+      <div class="day-body">
+        <strong>Green Creek &amp; Mill Spring</strong>
+        <p>Green Creek, Mill Spring, and surrounding eastern areas.</p>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="day-header wed-bg">
+        <div class="day-short">Wed</div>
+        <div class="day-name">Wednesday</div>
+      </div>
+      <div class="day-body">
+        <strong>Saluda</strong>
+        <p>Saluda and surrounding northern areas near Hwy 176.</p>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="day-header thu-bg">
+        <div class="day-short">Thu</div>
+        <div class="day-name">Thursday</div>
+      </div>
+      <div class="day-body">
+        <strong>Tryon</strong>
+        <p>Tryon and surrounding western areas along Hwy 176.</p>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="day-header fri-bg">
+        <div class="day-short">Fri</div>
+        <div class="day-name">Friday</div>
+      </div>
+      <div class="day-body">
+        <strong>Sunny View &amp; Lake Lure Area</strong>
+        <p>Sunny View, Lake Lure area, and eastern Polk County near Rutherford County.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="map-section">
+  <div class="map-inner">
+    <div class="section-label">Service Map</div>
+    <h2 class="section-title">Polk County Pickup Zones</h2>
+    <p class="section-sub" style="margin-bottom:0;">The map below shows our 5 color-coded pickup zones across Polk County.</p>
+    <div class="map-wrapper">
+      <img src="service-map.png" alt="Polk County 5-Day Pickup Service Map – Precision Sanitation LLC"/>
+    </div>
+    <p class="map-note">Routes are subject to change. Please contact us at (828) 817-2307 with questions about your specific address.</p>
+  </div>
+</section>
+
+<section class="alert-strip">
+  <h2>Stay in the Loop</h2>
+  <p>Sign up for service alerts and route updates — delivered right to your phone.</p>
+  <div class="text-code">Text <span>"JOIN"</span> to (828) 817-2307</div>
+</section>
+
+<section class="contact-strip">
+  <h2>Not Sure About Your Pickup Day?</h2>
+  <p>Give us a call and we'll help figure out your zone and schedule.</p>
+  <a href="tel:8288172307" class="big-phone">📞 (828) 817-2307</a>
+  <br/>
+  <a href="contact.html" class="btn-white">Contact Us →</a>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-name">Precision Sanitation LLC</div>
+    <div style="font-size:0.82rem;margin-bottom:8px;">Reliable Trash Pickup · Polk County, NC</div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="servicearea.html">Service Area</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div style="font-size:0.78rem;">© 2025 Precision Sanitation LLC. All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>
