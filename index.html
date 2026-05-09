@@ -34,12 +34,8 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 24px; height: 68px;
     }
-    .nav-logo {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900; font-size: 1.4rem;
-      color: var(--white); text-decoration: none; letter-spacing: 0.5px;
-    }
-    .nav-logo span { color: var(--green); }
+    .nav-logo { text-decoration: none; display: flex; align-items: center; }
+    .nav-logo img { height: 48px; width: auto; display: block; }
     .nav-links { display: flex; gap: 8px; }
     .nav-links a {
       color: rgba(255,255,255,0.85); text-decoration: none;
@@ -109,38 +105,19 @@
       display: inline-block;
     }
     .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
-    .hero-badge-box {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 12px; padding: 32px;
+    /* HERO RIGHT COLUMN */
+    .hero-visual { display: flex; flex-direction: column; align-items: center; gap: 0; }
+    .hero-logo-img { width: 85%; max-width: 380px; height: auto; display: block; filter: drop-shadow(0 4px 24px rgba(0,0,0,0.4)); }
+    .hero-truck-img {
+      width: 115%; max-width: 520px; height: auto; display: block;
+      margin-top: -20px; margin-left: 10%;
+      filter: drop-shadow(0 12px 32px rgba(0,0,0,0.5));
+      animation: truckFloat 3s ease-in-out infinite;
     }
-    .hero-badge-box .logo-text {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900; font-size: 3.5rem; line-height: 1;
-      letter-spacing: 2px; color: var(--white); margin-bottom: 4px;
+    @keyframes truckFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
     }
-    .hero-badge-box .logo-text .g { color: var(--green); }
-    .hero-badge-box .logo-text .b { color: #5ba8f5; }
-    .hero-badge-box .sub { color: rgba(255,255,255,0.6); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
-    .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
-    .stat-item { text-align: center; }
-    .stat-num {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900; font-size: 2.2rem; color: var(--green);
-    }
-    .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; }
-    .phone-hero {
-      display: flex; align-items: center; gap: 10px;
-      margin-top: 20px; padding: 14px 20px;
-      background: rgba(255,255,255,0.08); border-radius: 8px;
-    }
-    .phone-icon { font-size: 1.4rem; }
-    .phone-text a {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800; font-size: 1.5rem; color: var(--white);
-      text-decoration: none; letter-spacing: 1px;
-    }
-    .phone-text small { display: block; color: rgba(255,255,255,0.5); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
 
     /* SCHEDULE STRIP */
     .schedule-strip {
@@ -248,8 +225,10 @@
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
-      .hero-inner { grid-template-columns: 1fr; gap: 36px; }
-      .hero-badge-box { display: none; }
+      .hero-inner { grid-template-columns: 1fr; gap: 20px; }
+      .hero-visual { order: -1; }
+      .hero-logo-img { width: 60%; max-width: 260px; }
+      .hero-truck-img { width: 100%; margin-left: 0; margin-top: -10px; }
       .nav-links a:not(.nav-phone) { display: none; }
     }
     @media (max-width: 480px) {
@@ -261,7 +240,9 @@
 
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo"><span>PS</span> Precision Sanitation</a>
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="Precision Sanitation LLC"/>
+    </a>
     <div class="nav-links">
       <a href="index.html" class="active">Home</a>
       <a href="about.html">About</a>
@@ -283,34 +264,9 @@
         <a href="servicearea.html" class="btn-outline">View Service Map</a>
       </div>
     </div>
-    <div class="hero-badge-box">
-      <div class="logo-text"><span class="g">P</span><span class="b">S</span></div>
-      <div class="sub">Precision Sanitation LLC</div>
-      <div class="stat-row">
-        <div class="stat-item">
-          <div class="stat-num">5</div>
-          <div class="stat-label">Days a Week</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">5+</div>
-          <div class="stat-label">Service Zones</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">100%</div>
-          <div class="stat-label">Local & Reliable</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">NC</div>
-          <div class="stat-label">Polk County</div>
-        </div>
-      </div>
-      <div class="phone-hero">
-        <div class="phone-icon">📞</div>
-        <div class="phone-text">
-          <a href="tel:8288172307">(828) 817-2307</a>
-          <small>Call or Text Anytime</small>
-        </div>
-      </div>
+    <div class="hero-visual">
+      <img src="logo.png" alt="Precision Sanitation LLC" class="hero-logo-img"/>
+      <img src="truck.png" alt="Precision Sanitation Truck" class="hero-truck-img"/>
     </div>
   </div>
 </section>
